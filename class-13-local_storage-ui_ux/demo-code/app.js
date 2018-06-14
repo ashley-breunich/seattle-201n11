@@ -25,7 +25,7 @@ var tracker = {
     chartVotes: [],
     img1: document.getElementsByClassName('img1')[0],
     img2: document.getElementsByClassName('img2')[0],
-    dislaySection: document.getElementById('display'),
+    displaySection: document.getElementById('display'),
     resultsButton: document.getElementById('button'),
 
     //now we need a way to randomize the img
@@ -85,7 +85,7 @@ var tracker = {
 
         tracker.updateChartData();
 
-        var chart = new chart(ctx, {
+        var chart = new Chart(ctx, {
             type: "bar", 
             data: {
                 labels: tracker.chartLabels,
