@@ -30,41 +30,51 @@ function handleSubmit(event) {
     cart.saveToLocalStorage();
     updateCounter();
     updateCartPreview();
-
 }
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
+    var selectElement = document.getElementById('items');
+    var selectedName = selectElement.options[selectElement.selectedIndex].text;
     // TODO: suss out the item picked from the select list
-    var selectedItem = document.getElementById('items');
-    var newItem = event.target.items.value;
+    for(var i = 0; i < Product.allProducts; i++) {
+        if(selectedName === Product.allProducts[i].name){
+            var selectedFilePath = Product.allProducts[i].filepath;
+        }
+    }
     // TODO: get the quantity
     var newQuantity = document.getElementById('quantity');
     var selectedQuantity = newQuantity.value;
     // TODO: using those, add one item to the Cart
-    new Cart(0, selectedQuantity);
+    new Cart(selectedName, selectedFilePath, selectedQuantity);
+}
+
+function saveToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(Cart.allInCart));
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
-var counter = 0; 
-// TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
-function updateCartPreview() {
-    // TODO: Get the item and quantity from the form
+
+var counter = 0;
+function updateCounter() {
     var quantity = document.getElementById('quantity');
     var newQuantity = quantity.value;
     counter += parseInt(newQuantity);
     var addToItemCount = document.getElementById('itemCount');
     addToItemCount.textContent = counter;
     console.log(addToItemCount);
-
+} 
+// TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
+function updateCartPreview() {
+    // TODO: Get the item and quantity from the form
     var item = document.getElementById('items');
     var newItem = items.value;
+    var newQuantity = quantity.value;
     // TODO: Add a new element to the cartContents div with that information
     var newChartContents = document.getElementById('cartContents');
     var ulEl = document.createElement('ul');
     var liEl = document.createElement('li');
-    liEl.textContent = newItem + ': ' + newQuantity;
+    liEl.textContent = newItem + ': ' + newQuantity + ' Ordered';
     ulEl.appendChild(liEl);
     newChartContents.appendChild(ulEl);
 }

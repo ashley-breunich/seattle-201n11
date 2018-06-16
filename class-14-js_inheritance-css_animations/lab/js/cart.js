@@ -53,7 +53,8 @@ function removeItemFromCart(event) {
     // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
     var removeItem = event.target.textContent;
     if (removeItem === 'X'){
-        Cart.removeItem ();
+        var tableBody = document.getElementsByTagName('tbody')[0];
+        tableBody.removeChild(event.target.parentNode);
     }
     // TODO: Save the cart back to local storage
     // TODO: Re-draw the cart table
