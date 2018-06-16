@@ -13,10 +13,9 @@ function populateForm() {
     var selectElement = document.getElementById('items');
     for (var i in Product.allProducts) {
         var option = document.createElement('option');
-        option.text = Product.allProducts[i].name;
-        selectElement.add(option);
+        option.textContent = Product.allProducts[i].name;
+        selectElement.appendChild(option);
     }
-
 }
 
 // When someone submits the form, we need to add the selected item to the cart
@@ -37,20 +36,37 @@ function handleSubmit(event) {
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
     // TODO: suss out the item picked from the select list
+    var selectedItem = document.getElementById('items');
     var newItem = event.target.items.value;
     // TODO: get the quantity
-    var newQuantity = parseInt(event.target.quantity.value);
+    var newQuantity = document.getElementById('quantity');
+    var selectedQuantity = newQuantity.value;
     // TODO: using those, add one item to the Cart
-    Cart.push(newItem, newQuantity);
+    new Cart(0, selectedQuantity);
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {}
-
+var counter = 0; 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
     // TODO: Get the item and quantity from the form
+    var quantity = document.getElementById('quantity');
+    var newQuantity = quantity.value;
+    counter += parseInt(newQuantity);
+    var addToItemCount = document.getElementById('itemCount');
+    addToItemCount.textContent = counter;
+    console.log(addToItemCount);
+
+    var item = document.getElementById('items');
+    var newItem = items.value;
     // TODO: Add a new element to the cartContents div with that information
+    var newChartContents = document.getElementById('cartContents');
+    var ulEl = document.createElement('ul');
+    var liEl = document.createElement('li');
+    liEl.textContent = newItem + ': ' + newQuantity;
+    ulEl.appendChild(liEl);
+    newChartContents.appendChild(ulEl);
 }
 
 // Set up the "submit" event listener on the form.
