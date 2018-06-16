@@ -7,9 +7,8 @@ var Cart = function (items) {
 };
 
 Cart.prototype.addItem = function (product, quantity) {
-    var newProduct = event.target.product.value;
-    var newQuantity = parseInt(event.target.quantity.value);
-    // this.items.push(newItem);
+    var newItem = new Cart(product, quantity);
+    this.items.push(newItem);
     // TODO: Fill in this instance method to create a new CartItem and add it to this.items
 };
 
